@@ -12,7 +12,7 @@ export default definePage({
     nav: 'Zug verspätet: Fahrgastrechte', card: '25 % ab 60 Minuten, 50 % ab 120 Minuten, Zeitkarten, Taxi und Hotel: was die Bahn bei Verspätung schuldet.',
     title: 'Fahrgastrechte Bahn: Entschädigung ab 60 Minuten Verspätung',
     description: 'Fahrgastrechte Bahn bei Verspätung: 25 % ab 60 Minuten, 50 % ab 120 Minuten, Pauschalen für Zeitkarten, Weiterfahrt, Taxi bis 120 €, mit Rechner und Fristen.',
-    h1: 'Zug verspätet: Entschädigung nach den Fahrgastrechten',
+    h1: 'Zug verspätet: Fahrgastrechte für Fahrkarte, Zeitkarte und BahnCard 100',
     intro: 'Bei der Bahn zählt nicht die Strecke, sondern der Fahrpreis: ein Viertel ab einer Stunde Verspätung am Ziel, die Hälfte ab zwei Stunden.',
     resume: 'Kommt Ihr Zug mindestens 60 Minuten zu spät am Zielbahnhof an, erstattet das Eisenbahnunternehmen nach Art. 19 der Verordnung (EU) 2021/782 ein Viertel des Fahrpreises für die betroffene einfache Fahrt, ab 120 Minuten die Hälfte. Maßgeblich ist der Zielbahnhof auf der Fahrkarte, nicht der einzelne Zug; ein verpasster Anschluss zählt mit. Beträge unter 4 € werden nicht ausgezahlt. Für Zeitkarten gibt es feste Pauschalen je Verspätung ab 60 Minuten: im Nahverkehr 1,50 € in der 2. Klasse, im Fernverkehr 5 €, mit der BahnCard 100 10 €, insgesamt höchstens ein Viertel des Zeitkartenwerts. Schon ab 20 Minuten erwarteter Verspätung entfällt bei Sparpreisen die Zugbindung. Bleibt die Bahn 100 Minuten lang eine Auskunft schuldig, dürfen Sie mit einem anderen Zug oder Bus weiterfahren. Seit Juni 2023 muss die Bahn bei Unwetter, Personen im Gleis oder Kabeldiebstahl keine Entschädigung mehr zahlen; Streiks des eigenen Personals entlasten sie nicht. Die Frist für den Antrag beträgt drei Monate.',
     faqs: [

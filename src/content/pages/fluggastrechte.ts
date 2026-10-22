@@ -8,9 +8,9 @@ export default definePage({
   de: {
     slug: 'fluggastrechteverordnung-261-2004',
     nav: 'Fluggastrechteverordnung', card: 'Welche Flüge die Verordnung 261/2004 erfasst, wer haftet und welche Rechte die Artikel 5 bis 10 geben.',
-    title: 'Fluggastrechteverordnung 261/2004: Ansprüche im Überblick',
+    title: 'Fluggastrechte-Verordnung 261/2004: Ansprüche im Überblick',
     description: 'Fluggastrechteverordnung 261/2004: welche Flüge erfasst sind, wer als ausführende Airline haftet und was Art. 5 bis 10 bei Ausfall und Verspätung gewähren.',
-    h1: 'Die Fluggastrechteverordnung: wen sie schützt und gegen wen',
+    h1: 'Internationale Flüge und Schweiz: wer Entschädigung bekommt, wer zahlt',
     intro: 'Zwei Fragen entscheiden fast jeden Fall, bevor es um Geld geht: Fällt der Flug unter die Verordnung, und welche Airline muss zahlen?',
     resume: 'Die Verordnung (EG) Nr. 261/2004 gilt für jeden Flug, der in der EU, in Island, Norwegen oder der Schweiz startet, gleich mit welcher Airline, und für Flüge aus einem Drittstaat in die EU, wenn eine Airline mit Betriebsgenehmigung aus der EU sie durchführt. Anspruchsgegner ist immer das ausführende Luftfahrtunternehmen, also die Gesellschaft, die den Flug tatsächlich fliegt, nicht der Reiseveranstalter und nicht die Airline, deren Flugnummer auf dem Ticket steht. Bei Annullierung (Art. 5) und Nichtbeförderung (Art. 4) sieht der Text selbst eine Ausgleichszahlung nach Art. 7 vor: 250 € bis 1 500 km, 400 € bis 3 500 km und für innereuropäische Flüge darüber, 600 € für längere Strecken. Für Verspätungen ab drei Stunden am Endziel hat der Europäische Gerichtshof dieselben Beträge zugesprochen. Daneben stehen Wahlrechte auf Erstattung oder Umbuchung (Art. 8) und Betreuung mit Mahlzeiten, Hotel und Kommunikation (Art. 9). Die Rechte können vertraglich weder ausgeschlossen noch beschränkt werden (Art. 15). Ab dem 23. Oktober 2027 gilt eine geänderte Fassung.',
     faqs: [

@@ -8,9 +8,9 @@ export default definePage({
   de: {
     slug: 'fahrgastrechte-formular-ausfuellen',
     nav: 'Fahrgastrechte-Formular', card: 'Online oder auf Papier: welche Angaben die Bahn braucht, wohin der Antrag geht und was bei Auslandsfahrkarten gilt.',
-    title: 'Fahrgastrechte-Formular: Antrag Schritt für Schritt stellen',
+    title: 'Fahrgastrechte-Formular online ausfüllen und einreichen',
     description: 'Fahrgastrechte-Formular der Bahn ausfüllen: online oder auf Papier, nötige Zeiten und Belege, Zeitkarten sammeln, Auslandsfahrkarten, Frist von drei Monaten.',
-    h1: 'Fahrgastrechte-Formular: den Antrag bei Zugverspätung richtig stellen',
+    h1: 'Fahrgastrechte-Formular der Deutschen Bahn: den Antrag richtig stellen',
     intro: 'Der Antrag ist kurz, aber eine falsche Uhrzeit oder ein fehlender Beleg verzögert ihn um Wochen. So kommt er beim ersten Mal durch.',
     resume: 'Entschädigung, Erstattung und Ersatz von Taxi- oder Hotelkosten beantragen Sie beim Unternehmen, das Ihre Fahrkarte ausgegeben hat. Bei der DB geht das online über das Kundenkonto und die App, im Reisezentrum oder mit dem Fahrgastrechte-Formular, das die DB als PDF bereitstellt. Sie brauchen die Fahrkarte oder ihre Auftragsnummer, das Reisedatum, den Zielbahnhof, die planmäßige und die tatsächliche Ankunftszeit sowie die Zugnummern, bei einem verpassten Anschluss auch die des Anschlusszugs. Für Auslagen legen Sie Quittungen bei. Inhaber von Zeitkarten sammeln die Fälle innerhalb der Gültigkeit und reichen sie zusammen ein, weil Beträge unter 4 € nicht ausgezahlt werden. Wurde eine grenzüberschreitende Fahrkarte von einer ausländischen Bahn ausgegeben, ist diese zuständig; die DB leitet Anträge sonst weiter, was Zeit kostet. Die Verordnung sieht drei Monate nach der Fahrt vor, die Zahlung muss binnen eines Monats folgen. Lehnt die Bahn ab, schlichtet die söp kostenlos.',
     faqs: [

@@ -8,9 +8,9 @@ export default definePage({
   de: {
     slug: 'flug-annulliert-entschaedigung',
     nav: 'Flug annulliert', card: 'Wann eine Absage Geld bringt, wie Vorwarnzeit und Ersatzflug zusammenwirken, Erstattung in sieben Tagen.',
-    title: 'Flug annulliert: Entschädigung, Ersatzflug und Erstattung',
+    title: 'Flug annulliert, Flugausfall: Entschädigung und Musterbrief',
     description: 'Flug annulliert: Entschädigung 250 bis 600 €, wann 14 oder 7 Tage Vorwarnung sie ausschließen, Ersatzflug oder Erstattung binnen 7 Tagen, alte und neue Regeln.',
-    h1: 'Flug annulliert: was die Airline schuldet, wenn sie absagt',
+    h1: 'Flug annulliert: was die Airline schuldet und welche Frist gilt',
     intro: 'Bei einer Annullierung zählen drei Daten: wann Sie davon erfahren haben, wann der Ersatzflug startet und wann er ankommt.',
     resume: 'Sagt die Airline Ihren Flug ab, schuldet sie nach Art. 5 und 7 der Verordnung (EG) Nr. 261/2004 dieselbe Ausgleichszahlung wie bei einer langen Verspätung: 250 € bis 1 500 km, 400 € bis 3 500 km oder innerhalb der EU, 600 € darüber. Die Zahlung entfällt, wenn Sie mindestens 14 Tage vorher informiert wurden. Bei einer Mitteilung 7 bis 14 Tage vorher entfällt sie nur, wenn der angebotene Ersatzflug höchstens zwei Stunden früher startet und weniger als vier Stunden später ankommt; bei weniger als 7 Tagen sind es eine Stunde früher und weniger als zwei Stunden später. Unabhängig davon haben Sie die Wahl zwischen Erstattung des Ticketpreises binnen sieben Tagen und einer Beförderung zum Ziel. Die Airline muss beweisen, dass und wann sie Sie informiert hat. Für Flüge ab dem 23. Oktober 2027 fällt die Zwischenstufe weg: Unter 14 Tagen Vorwarnung zählt nur noch ein Ersatzflug, der höchstens eine Stunde früher abfliegt und weniger als zwei Stunden später ankommt.',
     faqs: [
