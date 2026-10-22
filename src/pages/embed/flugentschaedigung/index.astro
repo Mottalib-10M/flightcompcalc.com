@@ -1,0 +1,24 @@
+---
+/** Page à intégrer (iframe) : le calculateur seul. noindex, hors sitemap (astro.config). */
+import '../../../styles/global.css';
+import FlightCalc from '../../../components/calc/FlightCalc';
+import { SITE_URL, SITE_NAMES, LANG_TAGS } from '../../../data/site-config';
+import { route } from '../../../i18n/routes';
+const lang = 'de';
+const home = route('home', lang);
+---
+<!doctype html>
+<html lang={LANG_TAGS[lang]}>
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flugentschädigung berechnen (einbettbarer Rechner)</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={`${SITE_URL}${home}`} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  </head>
+  <body class="bg-white p-2 text-navy-900">
+    <main><FlightCalc client:load lang={lang} arg={JSON.stringify({ from: 'FRA', to: 'PMI', delay: 200 })} methodHref={`${SITE_URL}${route('method', lang)}`} idPrefix="embed" embed={true} /></main>
+    <p class="mt-2 text-center text-xs text-navy-600"><a href={`${SITE_URL}${home}`} target="_blank" rel="noopener" class="underline">{SITE_NAMES[lang]}</a> · Rechtsstand EU261, UK261, APPR · Großkreisentfernung aus OurAirports · ohne Provision</p>
+  </body>
+</html>

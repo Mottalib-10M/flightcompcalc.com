@@ -1,0 +1,12 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { route } from '../../i18n/routes';
+import { AUTHOR_NAME } from '../../data/site-config';
+const lang = 'fr';
+---
+<PageLayout title={'Politique éditoriale : sources officielles et corrections'} description={'Comment les pages sont rédigées : textes officiels et décisions seulement, chaque chiffre tiré d’un fichier de paramètres, exemples testés, aucun argent des transporteurs.'} lang={lang} noindex={true} breadcrumbs={[{ label: 'Politique éditoriale' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Politique éditoriale</h1>
+    <h2>Ce qui compte comme source</h2><p>Les textes officiels seulement : Justice Canada, Office des transports du Canada, EUR-Lex, legislation.gov.uk, arrêts de la Cour de justice de l’Union européenne. Un article de presse peut signaler un changement ; nous le publions après lecture du texte d’origine.</p><h2>Comment un chiffre arrive sur une page</h2><p>Montants, seuils et délais sont inscrits dans un seul fichier de paramètres, avec leur source et leur date de vérification. Pages et calculateurs lisent ce fichier ; personne ne tape un montant à la main. Des tests rejouent des cas connus avant toute mise en ligne.</p><h2>Ce qui n’est pas encore en vigueur</h2><p>Une modification seulement proposée du RPPA est présentée comme un projet ; une règle adoptée mais pas encore applicable, comme le règlement (UE) 2026/2202, est donnée avec sa date d’application.</p><h2>Indépendance</h2><p>{AUTHOR_NAME} ne reçoit aucun argent de transporteurs, d’aéroports, de sociétés de réclamation, de cabinets d’avocats ou d’assureurs. Les pages ne portent aucun lien d’affiliation.</p><h2>Corrections</h2><p>Une erreur signalée est vérifiée sur le texte officiel et, si nous nous sommes trompés, corrigée le jour même. Écrivez-nous par la <a href={route('contact', lang)}>page contact</a>.</p>
+  </div>
+</PageLayout>

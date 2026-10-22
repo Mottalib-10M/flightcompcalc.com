@@ -1,0 +1,22 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LegalIdentity from '../../components/LegalIdentity.astro';
+import { CONTACT_EMAIL } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { contactPageSchema } from '../../lib/seo';
+const lang = 'en';
+const path = route('contact', lang);
+const description = 'Write to the publisher of the flight delay compensation calculator about an error, a ruling or a source. Email only: no form, no account, no commission and no legal advice.';
+---
+<PageLayout title={'Contact Flight Compensation Without Commission: errors'} description={description} lang={lang} noindex={true} jsonLd={[contactPageSchema({ name: 'Contact', description, path, lang })]} breadcrumbs={[{ label: 'Contact' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Contact</h1>
+    <p>Write to <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. There is no form, no phone line and no account: one address, read by the people who maintain the calculator.</p>
+    <h2>Messages that help</h2>
+    <ul><li>An amount or a deadline that differs from the official text: please give the reference.</li><li>A new judgment of the Court of Justice, a UK court or the Canadian Transportation Agency.</li><li>An airport missing from the list or placed in the wrong country.</li><li>Embedding the calculator on a travel blog or forum: the code is on the <a href={route('widget', lang)}>embed page</a>.</li></ul>
+    <h2>What we cannot do</h2>
+    <p>We do not act for you against an airline, review individual cases or forward claims. In the UK, approved ADR bodies and the Civil Aviation Authority handle complaints; in Canada, the Canadian Transportation Agency.</p>
+    <h2>Publisher</h2>
+    <LegalIdentity lang={lang} />
+  </div>
+</PageLayout>

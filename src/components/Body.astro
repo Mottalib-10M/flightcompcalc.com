@@ -1,0 +1,13 @@
+---
+/** Le corps HTML d'un fichier de contenu, ses mini-simulateurs rendus en îlots. */
+import MiniSim from './calc/MiniSim';
+import { miniHref } from '../lib/mini-targets';
+import type { Locale } from '../i18n/routes';
+interface Props { html: string; path: string; lang: Locale; prefix?: string }
+const { html, path, lang, prefix = 'm' } = Astro.props;
+const parts = html.split(/<!--mini:([A-Za-z0-9_]+)(?:\|([A-Za-z0-9+/=]+))?-->/);
+const decode = (b?: string) => (b ? Buffer.from(b, 'base64').toString('utf8') : undefined);
+---
+<div class="prose prose-slate max-w-none">
+  {parts.map((p, i) => i % 3 === 0 ? <Fragment set:html={p ?? ''} /> : i % 3 === 1 ? <div class="mini-bloc"><MiniSim client:idle kind={p} lang={lang} arg={decode(parts[i + 1])} href={miniHref(p, lang, path)} idPrefix={`${prefix}${i}`} /></div> : null)}
+</div>

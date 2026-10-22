@@ -1,0 +1,27 @@
+{
+ "accent": "#B3261E",
+ "symbol": "✈",
+ "variants": [
+  {
+   "file": "og-de.png",
+   "title": "Flugverspätung Entschädigung\n250, 400 oder 600 € ohne Provision",
+   "subtitle": "Großkreisentfernung · Verordnung 261/2004 · Musterschreiben im Browser",
+   "badge": "Neu: Verordnung (EU) 2026/2202 ab 23.10.2027",
+   "brand": "Flugentschädigung ohne Provision"
+  },
+  {
+   "file": "og-en.png",
+   "title": "Flight delay compensation\nEU261, UK261 and Canada",
+   "subtitle": "Great-circle distance · exact band · claim letter built in your browser",
+   "badge": "No commission, no sign-up",
+   "brand": "Flight Compensation Without Commission"
+  },
+  {
+   "file": "og-fr.png",
+   "title": "Indemnité de vol retardé\nau Canada, sans commission",
+   "subtitle": "Règlement DORS/2019-150 · grand ou petit transporteur · lettre prête",
+   "badge": "400 $ à 1 000 $ selon le retard",
+   "brand": "Indemnité de vol sans commission"
+  }
+ ]
+}

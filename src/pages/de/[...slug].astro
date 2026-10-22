@@ -1,0 +1,11 @@
+---
+/** Chaque page de contenu (src/content/pages), version de. */
+import ContentPage from '../../components/ContentPage.astro';
+import { PAGES } from '../../lib/pages';
+import type { PageDef } from '../../lib/page-types';
+export function getStaticPaths() {
+  return PAGES.filter((p) => p.de && p.de.slug !== '').map((page) => ({ params: { slug: page.de!.slug }, props: { page } }));
+}
+const { page } = Astro.props as { page: PageDef };
+---
+<ContentPage page={page} lang="de" />

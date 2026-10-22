@@ -1,0 +1,22 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LegalIdentity from '../../components/LegalIdentity.astro';
+import { CONTACT_EMAIL } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { contactPageSchema } from '../../lib/seo';
+const lang = 'fr';
+const path = route('contact', lang);
+const description = 'Écrire à l’éditeur du calculateur d’indemnité de vol : erreur, décision, source. Par courriel seulement : aucun formulaire, aucun compte, aucune commission ni avis juridique.';
+---
+<PageLayout title={'Contact Indemnité de vol sans commission : erreurs et sources'} description={description} lang={lang} noindex={true} jsonLd={[contactPageSchema({ name: 'Contact', description, path, lang })]} breadcrumbs={[{ label: 'Contact' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Contact</h1>
+    <p>Écrivez à <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Il n’y a ni formulaire, ni téléphone, ni compte : une adresse, lue par les personnes qui tiennent le calculateur à jour.</p>
+    <h2>Les messages utiles</h2>
+    <ul><li>Un montant ou un délai qui diffère du texte officiel : merci d’indiquer la référence.</li><li>Une nouvelle décision de l’Office des transports du Canada ou d’un tribunal.</li><li>Un aéroport absent de la liste ou mal classé.</li><li>Intégrer le calculateur sur un blogue ou un forum : le code est sur la <a href={route('widget', lang)}>page d’intégration</a>.</li></ul>
+    <h2>Ce que nous ne faisons pas</h2>
+    <p>Nous ne vous représentons pas auprès du transporteur, n’examinons pas de dossiers individuels et ne transmettons aucune demande. Les plaintes vont à l’Office des transports du Canada.</p>
+    <h2>Éditeur</h2>
+    <LegalIdentity lang={lang} />
+  </div>
+</PageLayout>

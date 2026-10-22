@@ -1,0 +1,41 @@
+---
+/** Méthode : données, distance, champ de chaque régime, montants, délais, lettre, limites. Chiffres de params-2026.json. */
+import PageLayout from '../../layouts/PageLayout.astro';
+import { route, homeOf } from '../../i18n/routes';
+import { helpers } from '../../lib/helpers';
+import { AIRPORT_COUNT } from '../../lib/airports';
+import META from '../../data/airports-meta.json';
+import { breadcrumbSchema, webPageSchema } from '../../lib/seo';
+const lang = 'fr';
+const h = helpers(lang);
+const P = h.P;
+const path = route('method', lang);
+const title = 'Indemnité de vol, méthode : règles, montants et limites';
+const description = 'Comment le calculateur applique le RPPA canadien, le règlement 261/2004 et UK261 : distance orthodromique, taille du transporteur, causes, montants et délais.';
+const s = (k: string, t: string) => h.src(k, t);
+const ex = h.table(['Exemple', 'Retard à l’arrivée', 'Gros transporteur', 'Petit transporteur'], [
+  ['Toronto–Vancouver', '3 h 30', h.cad(P.appr.delay.large[0]), h.cad(P.appr.delay.small[0])],
+  ['Montréal–Calgary', '7 h', h.cad(P.appr.delay.large[1]), h.cad(P.appr.delay.small[1])],
+  ['Vancouver–Toronto', '10 h', h.cad(P.appr.delay.large[2]), h.cad(P.appr.delay.small[2])],
+], 'Cause sous le contrôle du transporteur, non liée à la sécurité (RPPA, art. 19)', ['l', 'r', 'r', 'r']);
+---
+<PageLayout title={title} description={description} lang={lang} jsonLd={[webPageSchema({ name: 'Méthode', description, path, lang }), breadcrumbSchema([{ name: 'Accueil', path: homeOf(lang) }, { name: 'Méthode', path }])]} breadcrumbs={[{ label: 'Méthode' }]}>
+  <article class="prose prose-slate max-w-none">
+    <h1>Comment le calculateur procède</h1>
+    <p>Chaque montant découle d’une règle écrite dans un texte officiel, inscrite dans un seul fichier de paramètres que lisent le calculateur, les pages et les tests automatiques. Rien de ce que vous saisissez ne quitte votre navigateur.</p>
+    <h2>Le régime canadien</h2>
+    <p>Le <Fragment set:html={s('appr', 'Règlement sur la protection des passagers aériens')} /> s’applique à tout vol à destination, en provenance ou à l’intérieur du Canada, quelle que soit la compagnie. Le montant dépend de trois choses : la taille du transporteur (gros s’il a transporté au moins deux millions de passagers dans le monde au cours de chacune des deux années civiles précédentes), le retard à l’arrivée à la destination finale (3, 6 et 9 heures) et la catégorie de la cause : sous le contrôle du transporteur, sous son contrôle mais nécessaire par souci de sécurité, ou hors de son contrôle. Seule la première ouvre droit à l’indemnité.</p>
+    <Fragment set:html={ex} />
+    <p>Refus d’embarquement sous le contrôle du transporteur : {h.cad(P.appr.denied_boarding.amounts[0])} sous 6 heures de retard, {h.cad(P.appr.denied_boarding.amounts[1])} de 6 à 9 heures, {h.cad(P.appr.denied_boarding.amounts[2])} au-delà. Billet remboursé au lieu d’un réacheminement : {h.cad(P.appr.refund_instead.large)} (gros) ou {h.cad(P.appr.refund_instead.small)} (petit). Annulation annoncée plus de 14 jours avant : pas d’indemnité.</p>
+    <h2>Les vols au départ de l’Europe</h2>
+    <p>Un vol Montréal–Paris est couvert par le RPPA ; le retour Paris–Montréal l’est aussi, et en plus par le <Fragment set:html={s('eu261', 'règlement (CE) n° 261/2004')} /> parce qu’il part de l’Union européenne. L’indemnité européenne se calcule selon la distance orthodromique : {h.eur(P.eu261.amounts[0])}, {h.eur(P.eu261.amounts[1])} ou {h.eur(P.eu261.amounts[2])} ({h.km('CDG', 'YUL')} entre Paris-Charles-de-Gaulle et Montréal-Trudeau). La distance est celle du grand cercle, sur une sphère de 6 371 km de rayon, entre les deux aéroports de la liste d’<Fragment set:html={s('ourairports', 'OurAirports')} /> ({h.n(AIRPORT_COUNT)} aéroports à vols réguliers, lue le {h.day(META.retrieved_at)}). Le calculateur affiche les deux régimes, le plus favorable d’abord, mais on ne peut pas être indemnisé deux fois pour le même événement (<Fragment set:html={s('cta-act', 'Loi sur les transports au Canada, art. 86.11(3)')} />).</p>
+    <h2>Causes</h2>
+    <p>Par défaut, une panne technique est classée « nécessaire par souci de sécurité » (pas d’indemnité), sauf si elle a été découverte lors d’un entretien programmé ; une grève au sein du transporteur, la météo, le contrôle aérien, une urgence médicale ou un risque de sûreté sont « hors de son contrôle » (art. 10). En Europe, au contraire, la grève du personnel de la compagnie et la panne ordinaire n’exonèrent pas le transporteur (CJUE, C-28/20 et C-549/07).</p>
+    <h2>Délais</h2>
+    <p>Canada : demande au transporteur avant le premier anniversaire du vol ; il répond dans les 30 jours. Europe : trois ans en Allemagne à compter de la fin de l’année du vol, neuf mois pour les vols à partir du 23 octobre 2027 (<Fragment set:html={s('eu2202', 'règlement (UE) 2026/2202')} />). Royaume-Uni : six ans (cinq en Écosse).</p>
+    <h2>La lettre</h2>
+    <p>La lettre se compose dans votre navigateur. Votre nom, votre adresse, votre code de réservation et vos coordonnées bancaires ne sont ni enregistrés, ni transmis, ni inscrits dans le lien à partager, qui ne contient que les aéroports et les réglages.</p>
+    <h2>Limites et contrôles</h2>
+    <p>Le calculateur ne connaît ni la cause réelle du retard, ni la taille exacte d’un transporteur peu connu (l’Office des transports du Canada et le transporteur peuvent vous la confirmer). Le RPPA est en cours de révision : les modifications publiées en projet ne sont pas appliquées tant qu’elles ne sont pas en vigueur. Des tests automatiques rejouent avant chaque mise en ligne les montants, les seuils de 3, 6 et 9 heures, le refus d’embarquement et les délais. Paramètres vérifiés sur les textes officiels le {h.day(P.retrieved_at)}.</p>
+  </article>
+</PageLayout>

@@ -1,0 +1,22 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LegalIdentity from '../../components/LegalIdentity.astro';
+import { CONTACT_EMAIL } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { contactPageSchema } from '../../lib/seo';
+const lang = 'de';
+const path = route('contact', lang);
+const description = 'Schreiben Sie dem Betreiber des Rechners für Flugentschädigung: Fehler, Urteile, Quellen. Nur E-Mail, kein Formular, kein Konto, keine Provision und keine Rechtsberatung.';
+---
+<PageLayout title={'Kontakt Flugentschädigung ohne Provision: Fehler melden'} description={description} lang={lang} noindex={true} jsonLd={[contactPageSchema({ name: 'Kontakt', description, path, lang })]} breadcrumbs={[{ label: 'Kontakt' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Kontakt</h1>
+    <p>Schreiben Sie an <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Es gibt kein Formular, keine Telefonnummer und kein Konto: eine Adresse, gelesen von den Menschen, die den Rechner pflegen.</p>
+    <h2>Was hilft</h2>
+    <ul><li>Ein Betrag oder eine Frist, die vom amtlichen Text abweicht: bitte mit Fundstelle.</li><li>Ein neues Urteil des EuGH oder des BGH zu Fluggastrechten.</li><li>Ein Flughafen, der in der Liste fehlt oder falsch zugeordnet ist.</li><li>Einbindung des Rechners in ein Reiseblog oder Forum: der Code steht auf der <a href={route('widget', lang)}>Seite „Rechner einbinden“</a>.</li></ul>
+    <h2>Was wir nicht tun</h2>
+    <p>Wir vertreten Sie nicht gegenüber der Airline, prüfen keine Einzelfälle und leiten keine Forderungen weiter. Für eine Schlichtung ist die söp zuständig, für die Aufsicht das Luftfahrt-Bundesamt.</p>
+    <h2>Betreiber</h2>
+    <LegalIdentity lang={lang} />
+  </div>
+</PageLayout>

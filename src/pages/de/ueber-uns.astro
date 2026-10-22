@@ -1,0 +1,30 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LegalIdentity from '../../components/LegalIdentity.astro';
+import { route, homeOf } from '../../i18n/routes';
+import { AUTHOR_NAME, AUTHOR_DESC, CONTACT_EMAIL } from '../../data/site-config';
+import { srcLink } from '../../lib/helpers';
+import { profilePageSchema, breadcrumbSchema } from '../../lib/seo';
+const lang = 'de';
+const path = route('about', lang);
+const title = 'Flugentschädigung ohne Provision: wer die Seite betreibt';
+const description = 'Wer den Rechner für Flugverspätung und Annullierung betreibt, warum er keine Provision nimmt, woher Recht und Flughafendaten kommen und was er nie verlangt.';
+const s = (k: string, t: string) => srcLink(k, lang, t);
+---
+<PageLayout title={title} description={description} lang={lang} jsonLd={[profilePageSchema({ path, lang }), breadcrumbSchema([{ name: 'Start', path: homeOf(lang) }, { name: 'Über uns', path }])]} breadcrumbs={[{ label: 'Über uns' }]}>
+  <article class="prose prose-slate max-w-none">
+    <h1>Über diese Seite</h1>
+    <p>{AUTHOR_DESC.de}</p>
+    <h2>Warum es sie gibt</h2>
+    <p>Wer „Flugverspätung Entschädigung“ sucht, landet zuerst bei Fluggastrechte-Portalen. Ihre Rechner wollen Buchungscode und E-Mail-Adresse, bevor sie etwas zeigen, und im Erfolgsfall behalten sie einen Teil der Zahlung, üblicherweise ein Viertel bis ein Drittel einschließlich Umsatzsteuer. Die Airline schuldet Ihnen aber den vollen Betrag, und der Anspruch selbst ist ein Brief. Diese Seite liefert den genauen Betrag, die Frist und das Schreiben, und das Geld bleibt dort, wo das Gesetz es hinlegt: bei Ihnen.</p>
+    <h2>Wer sie betreibt</h2>
+    <p>{AUTHOR_NAME} ist ein Unternehmen, das Rechner auf Grundlage amtlicher Texte und offener Daten baut. Es ist keine Behörde, keine Kanzlei und kein Inkassodienst und hat keine Verbindung zu Airlines, Flughäfen, Schlichtungsstellen oder Aufsichtsbehörden. Es verkauft nichts, erhält keine Provision, setzt keine Affiliate-Links und fragt weder Name noch E-Mail ab.</p>
+    <LegalIdentity lang={lang} />
+    <h2>Woher die Angaben stammen</h2>
+    <p>Die Regeln stammen aus den amtlichen Texten: <Fragment set:html={s('eu261', 'Verordnung (EG) Nr. 261/2004')} /> und ihre Änderung durch die <Fragment set:html={s('eu2202', 'Verordnung (EU) 2026/2202')} />, die britische Fassung <Fragment set:html={s('uk261', 'UK261')} />, die kanadischen <Fragment set:html={s('appr', 'Air Passenger Protection Regulations')} /> sowie die Urteile des Europäischen Gerichtshofs zur Drei-Stunden-Regel. Die Koordinaten der Flughäfen stammen von <Fragment set:html={s('ourairports', 'OurAirports')} /> und sind gemeinfrei. Die <a href={route('method', lang)}>Methodik</a> beschreibt jede Regel des Rechners, die <a href={route('editorial', lang)}>redaktionellen Grundsätze</a> den Umgang mit Fehlern.</p>
+    <h2>Was sie nicht tut</h2>
+    <p>Sie kennt den Grund Ihrer Verspätung nicht, den kennt nur die Airline. Sie verschickt keine Forderung, verhandelt nicht und klagt nicht für Sie. Das Ergebnis ist eine allgemeine Information auf Grundlage Ihrer Eingaben, keine Rechtsberatung.</p>
+    <h2>Schreiben Sie uns</h2>
+    <p><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>, um einen Fehler oder ein übersehenes Urteil zu melden.</p>
+  </article>
+</PageLayout>

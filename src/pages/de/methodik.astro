@@ -1,0 +1,50 @@
+---
+/** Methodik: Daten, Entfernung, Anwendungsbereich, Beträge, Fristen, Schreiben, Grenzen. Zahlen aus params-2026.json. */
+import PageLayout from '../../layouts/PageLayout.astro';
+import { route, homeOf } from '../../i18n/routes';
+import { helpers } from '../../lib/helpers';
+import { AIRPORT_COUNT } from '../../lib/airports';
+import META from '../../data/airports-meta.json';
+import { breadcrumbSchema, webPageSchema } from '../../lib/seo';
+const lang = 'de';
+const h = helpers(lang);
+const P = h.P;
+const path = route('method', lang);
+const title = 'Flugentschädigung Methodik: Entfernung, Regeln, Grenzen';
+const description = 'So rechnet der Rechner: Großkreisentfernung aus OurAirports, Geltungsbereich von EU261, UK261 und APPR, Beträge, Kürzungen, Fristen und seine Grenzen.';
+const s = (k: string, t: string) => h.src(k, t);
+const ex = h.table(['Beispiel', 'Entfernung', 'EU261', 'UK261'], [
+  ['Frankfurt nach Palma', h.km('FRA', 'PMI'), h.eur(P.eu261.amounts[0]), '–'],
+  ['Hamburg nach Gran Canaria', h.km('HAM', 'LPA'), h.eur(P.eu261.intra_over_1500), '–'],
+  ['London Heathrow nach New York JFK', h.km('LHR', 'JFK'), '–', h.gbp(P.uk261.amounts[2])],
+  ['München nach Dubai', h.km('MUC', 'DXB'), h.eur(P.eu261.amounts[2]), '–'],
+], 'Vier Stunden Verspätung am Endziel, Ursache im Verantwortungsbereich der Airline', ['l', 'r', 'r', 'r']);
+---
+<PageLayout title={title} description={description} lang={lang} jsonLd={[webPageSchema({ name: 'Methodik', description, path, lang }), breadcrumbSchema([{ name: 'Start', path: homeOf(lang) }, { name: 'Methodik', path }])]} breadcrumbs={[{ label: 'Methodik' }]}>
+  <article class="prose prose-slate max-w-none">
+    <h1>So rechnet der Rechner</h1>
+    <p>Jeder Betrag folgt aus einer Regel eines amtlichen Textes. Alle Werte stehen in einer einzigen Parameterdatei, die Rechner, Seiten und automatische Tests gemeinsam lesen. Ihre Eingaben verlassen den Browser nicht. Hier stehen die Regeln, die Daten und die Grenzen.</p>
+    <h2>Flughäfen und Entfernung</h2>
+    <p>Die Liste umfasst {h.n(AIRPORT_COUNT)} Flughäfen mit Linienverkehr und IATA-Code aus <Fragment set:html={s('ourairports', 'OurAirports')} /> (gemeinfrei, gelesen am {h.day(META.retrieved_at)}). Gerechnet wird die Großkreisentfernung zwischen beiden Flughäfen auf einer Kugel mit 6 371 km Radius, wie Art. 7 Abs. 4 der Verordnung es vorschreibt; die tatsächlich geflogene Strecke mit Umwegen und Warteschleifen zählt nicht. Bei einer einheitlichen Buchung mit Umstieg zählt die Entfernung vom ersten Abflug- bis zum Endflughafen (EuGH, Folkerts, C-11/11).</p>
+    <Fragment set:html={ex} />
+    <h2>Welches Recht gilt</h2>
+    <ul>
+      <li><strong>EU261</strong> (<Fragment set:html={s('eu261', 'Verordnung (EG) Nr. 261/2004')} />): Abflug von einem Flughafen in der EU (einschließlich der Gebiete in äußerster Randlage), in Island, Norwegen oder der Schweiz mit jeder Airline; oder Ankunft dort aus einem Drittstaat mit einer Airline aus EU, EWR oder Schweiz. Für Flüge ab dem 23. Oktober 2027 rechnet der Rechner mit der Fassung der <Fragment set:html={s('eu2202', 'Verordnung (EU) 2026/2202')} />.</li>
+      <li><strong>UK261</strong> (<Fragment set:html={s('uk261', 'britische Fassung')} />): Abflug im Vereinigten Königreich mit jeder Airline; Ankunft dort mit einer britischen oder EU-Airline; Ankunft in der EU mit einer britischen Airline.</li>
+      <li><strong>APPR</strong> (<Fragment set:html={s('appr', 'SOR/2019-150')} />): jeder Flug nach, von oder innerhalb Kanadas, gleich mit welcher Airline.</li>
+    </ul>
+    <p>Gelten zwei Regelungen, zeigt der Rechner beide und den höheren Betrag zuerst. Doppelt kassieren lässt sich dasselbe Ereignis nicht: Kanada schreibt das in <Fragment set:html={s('cta-act', 'Art. 86.11 Abs. 3 des Canada Transportation Act')} />, europäische Gerichte rechnen bereits Gezahltes an.</p>
+    <h2>Beträge</h2>
+    <p>EU261: {h.eur(P.eu261.amounts[0])} bis 1 500 km, {h.eur(P.eu261.amounts[1])} zwischen 1 500 und 3 500 km sowie für alle innergemeinschaftlichen Flüge über 1 500 km, {h.eur(P.eu261.amounts[2])} darüber. Verspätung: drei Stunden oder mehr am Endziel (<Fragment set:html={s('sturgeon', 'Sturgeon')} />), für Flüge ab dem 23. Oktober 2027 mehr als drei Stunden. Die oberste Stufe darf halbiert werden, wenn die Ankunft weniger als vier Stunden (nach neuem Recht höchstens vier Stunden) zu spät ist. UK261: {h.gbp(P.uk261.amounts[0])}, {h.gbp(P.uk261.amounts[1])}, {h.gbp(P.uk261.amounts[2])} mit denselben Schwellen. APPR: große Airline {h.cad(P.appr.delay.large[0])}, {h.cad(P.appr.delay.large[1])}, {h.cad(P.appr.delay.large[2])} ab 3, 6 und 9 Stunden; kleine Airline {h.cad(P.appr.delay.small[0])}, {h.cad(P.appr.delay.small[1])}, {h.cad(P.appr.delay.small[2])}; Nichtbeförderung {h.cad(P.appr.denied_boarding.amounts[0])}, {h.cad(P.appr.denied_boarding.amounts[1])}, {h.cad(P.appr.denied_boarding.amounts[2])}.</p>
+    <h2>Annullierungen und Ursachen</h2>
+    <p>Wer mindestens 14 Tage vorher von der Annullierung erfährt, erhält keine Ausgleichszahlung. Bei kürzerer Frist entfällt sie ebenfalls, wenn der Ersatzflug nah an den ursprünglichen Zeiten liegt; der Rechner wendet je nach Flugdatum die Zeitfenster des geltenden oder des geänderten Textes an. Unwetter, Flugsicherung, Streiks am Flughafen, Sicherheitsrisiken und medizinische Notfälle erscheinen als „nur wenn keine außergewöhnlichen Umstände“: Die Airline muss die Ursache und alle zumutbaren Maßnahmen beweisen. Ein technischer Defekt und ein Streik des eigenen Personals gelten in Europa als beherrschbar (C-549/07, C-28/20); nach APPR gilt ein Streik innerhalb der Airline dagegen als außerhalb ihrer Kontrolle, und ein Defekt außerhalb der planmäßigen Wartung als sicherheitsbedingt.</p>
+    <h2>Fristen</h2>
+    <p>Deutschland: drei Jahre ab Ende des Jahres, in dem der Flug stattfand (<Fragment set:html={s('bgb195', '§ 195')} /> und <Fragment set:html={s('bgb199', '§ 199 BGB')} />). Ab dem 23. Oktober 2027: Antrag an die Airline innerhalb von neun Monaten ab dem Flugdatum. England und Wales: sechs Jahre (<Fragment set:html={s('limitation-ew', 'Limitation Act 1980')} />), Schottland: fünf Jahre. Kanada: Antrag an die Airline innerhalb eines Jahres.</p>
+    <h2>Das Anspruchsschreiben</h2>
+    <p>Das Schreiben entsteht im Browser aus Ihren Angaben und der anwendbaren Regel. Name, Anschrift, Buchungscode und Bankverbindung bleiben im Arbeitsspeicher der Seite: Sie werden nicht gespeichert, nicht übertragen und nie in den Link geschrieben, der nur Flughäfen und Einstellungen enthält.</p>
+    <h2>Grenzen</h2>
+    <p>Der Rechner kennt weder die wahre Ursache einer Verspätung noch die Lizenz der Airline bei Codeshare-Flügen (geben Sie die ausführende Airline an) noch die Frage, ob Sie schon Gutscheine angenommen haben. Freiflüge, die der Öffentlichkeit nicht zugänglich sind, und Flüge aus Drittstaaten mit Airlines außerhalb Europas fallen nicht unter EU261. Allgemeine Information, keine Rechtsberatung.</p>
+    <h2>Prüfungen</h2>
+    <p>Vor jeder Veröffentlichung spielen automatische Tests Rechenbeispiele durch: die Grenze 2 Std. 59 / 3 Std., die Kürzung bei 3 Std. 30 auf der Langstrecke, den Wechsel am 23. Oktober 2027, innergemeinschaftliche Flüge über 3 500 km, den Geltungsbereich von UK261 und APPR, die kanadischen Beträge und alle Fristen. Die Parameterdatei wurde zuletzt am {h.day(P.retrieved_at)} mit den amtlichen Texten abgeglichen; die SZR-Kurse für die Gepäckhaftung aktualisiert ein Skript wöchentlich.</p>
+  </article>
+</PageLayout>

@@ -1,0 +1,69 @@
+---
+/**
+ * Toute page de contenu : H1, phrase de réponse, le calculateur tout de suite, la réponse citable repliée,
+ * le corps (mini-simulateurs compris), les textes longs en accordéons, FAQ, pages liées, sources.
+ * L'accueil d'une langue (slug vide) ajoute le schéma du site et le sommaire de toutes les pages.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import Clamp from './Clamp.astro';
+import Tool from './Tool.astro';
+import Body from './Body.astro';
+import { route, hasRoute, homeOf, type Locale } from '../i18n/routes';
+import { label, GROUPS } from '../i18n/nav';
+import { t } from '../i18n/ui';
+import { helpers, sourceList } from '../lib/helpers';
+import { articleSchema, faqSchema, breadcrumbSchema, webPageSchema, webApplicationSchema, organizationSchema, websiteSchema } from '../lib/seo';
+import { AUTHOR_NAME, LAST_UPDATED, LANG_TAGS } from '../data/site-config';
+import { displayDate } from '../lib/format';
+import type { PageDef } from '../lib/page-types';
+import { PAGES, pageById } from '../lib/pages';
+import { AIRPORT_COUNT } from '../lib/airports';
+interface Props { page: PageDef; lang: Locale }
+const { page, lang } = Astro.props;
+const x = page[lang]!;
+const ui = t(lang);
+const path = route(page.id, lang);
+const isHome = x.slug === '';
+const group = GROUPS.find((g) => g.id === page.group)!;
+const h = helpers(lang);
+const jsonLd = isHome
+  ? [websiteSchema(lang), organizationSchema(lang), webPageSchema({ name: x.h1, description: x.description, path, lang }), webApplicationSchema({ name: x.h1, description: x.description, path, lang })]
+  : [webApplicationSchema({ name: x.h1, description: x.description, path, lang }), articleSchema({ title: x.h1, description: x.description, path, lang }), webPageSchema({ name: x.h1, description: x.description, path, lang }), breadcrumbSchema([{ name: ui.breadcrumbHome, path: homeOf(lang) }, { name: x.nav, path }])];
+if (x.faqs.length) jsonLd.push(faqSchema(x.faqs, lang));
+const related = page.related.filter((id) => hasRoute(id, lang)).map((id) => ({ href: route(id, lang), name: label(id, lang), description: pageById(id)?.[lang]?.card ?? '' }));
+const sources = sourceList(page.sources, lang);
+const fr = lang === 'fr', de = lang === 'de';
+const read = de ? `Rechtsstand ${displayDate(LAST_UPDATED, LANG_TAGS[lang])} · ${h.n(AIRPORT_COUNT)} Flughäfen (OurAirports)` : fr ? `droit en vigueur au ${displayDate(LAST_UPDATED, LANG_TAGS[lang])} · ${h.n(AIRPORT_COUNT)} aéroports (OurAirports)` : `law as of ${displayDate(LAST_UPDATED, LANG_TAGS[lang])} · ${h.n(AIRPORT_COUNT)} airports (OurAirports)`;
+const folds = x.folds ? x.folds(h) : [];
+const directory = isHome ? GROUPS.map((g) => ({ g, list: PAGES.filter((p) => p.group === g.id && hasRoute(p.id, lang) && p[lang]!.slug !== '') })).filter((d) => d.list.length) : [];
+const crumbs = isHome ? [] : [{ label: group.label[lang] }, { label: x.nav }];
+---
+<PageLayout title={x.title} description={x.description} lang={lang} jsonLd={jsonLd} faqs={x.faqs} related={related} sources={sources} breadcrumbs={crumbs}>
+  <article>
+    <header class="mb-4">
+      <h1 class="text-[1.65rem] font-bold text-navy-900 max-sm:leading-tight sm:text-3xl md:text-4xl">{x.h1}</h1>
+      <p class="mt-2 text-base text-navy-700 sm:text-lg">{x.intro}</p>
+    </header>
+    <div data-outil data-chrome class="mb-4"><Tool kind={page.tool} lang={lang} arg={page.toolArg} idPrefix={`p${page.order}`} /></div>
+    <p class="mb-6 text-sm text-navy-600">{ui.reviewedBy} <a href={route('about', lang)} class="underline hover:text-navy-900">{AUTHOR_NAME}</a> · <a href={route('method', lang)} class="underline hover:text-navy-900">{label('method', lang)}</a> · {read}</p>
+    <Clamp text={x.resume} lang={lang} id={`clamp-${page.id}`} class="mb-8" />
+    <Body html={x.body(h)} path={path} lang={lang} />
+    {folds.length > 0 && (
+      <section class="mt-10">
+        {folds.map((s, i) => <details class="fold"><summary><h2 class="fold-h">{s.title}</h2></summary><div class="pb-4"><Body html={s.html} path={path} lang={lang} prefix={`f${i}m`} /></div></details>)}
+      </section>
+    )}
+    {directory.length > 0 && (
+      <section class="mt-12" data-chrome>
+        {directory.map(({ g, list }) => (
+          <div class="mb-6">
+            <h2 class="text-xl font-bold text-navy-900">{g.label[lang]}</h2>
+            <ul class="mt-3 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2 lg:grid-cols-3">
+              {list.map((p) => <li><a href={route(p.id, lang)} class="font-medium text-accent-700 underline-offset-2 hover:underline">{p[lang]!.nav}</a><span class="block text-navy-600">{p[lang]!.card}</span></li>)}
+            </ul>
+          </div>
+        ))}
+      </section>
+    )}
+  </article>
+</PageLayout>

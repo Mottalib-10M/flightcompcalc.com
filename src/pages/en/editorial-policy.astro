@@ -1,0 +1,12 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { route } from '../../i18n/routes';
+import { AUTHOR_NAME } from '../../data/site-config';
+const lang = 'en';
+---
+<PageLayout title={'Editorial policy: official sources, checks and corrections'} description={'How the pages are written: official texts and judgments only, every figure from one parameter file, worked examples tested, and no money from airlines or claims companies.'} lang={lang} noindex={true} breadcrumbs={[{ label: 'Editorial policy' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Editorial policy</h1>
+    <h2>What counts as a source</h2><p>Official texts only: EUR-Lex, legislation.gov.uk, Justice Laws Canada, gesetze-im-internet.de, judgments of the Court of Justice of the EU and publications of the regulators. A news story can point us to a change; we publish it only after reading the original.</p><h2>How a figure reaches a page</h2><p>Amounts, thresholds and deadlines live in one parameter file with their source and the date they were checked. Pages and calculators read that file; nobody types an amount by hand. Tests replay known cases before any change goes live.</p><h2>What is not in force yet</h2><p>A rule adopted but not yet applicable, such as Regulation (EU) 2026/2202, is given with its start date; a draft is called a draft.</p><h2>Independence</h2><p>{AUTHOR_NAME} receives no money from airlines, airports, claims companies, law firms or insurers. The pages carry no affiliate links.</p><h2>Corrections</h2><p>A reported error is checked against the official text and, if we were wrong, corrected the same day. Write through the <a href={route('contact', lang)}>contact page</a>.</p>
+  </div>
+</PageLayout>

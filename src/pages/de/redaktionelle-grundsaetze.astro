@@ -1,0 +1,12 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { route } from '../../i18n/routes';
+import { AUTHOR_NAME } from '../../data/site-config';
+const lang = 'de';
+---
+<PageLayout title={'Redaktionelle Grundsätze: Quellen, Prüfung, Korrekturen'} description={'Wie die Seiten entstehen: nur amtliche Texte und Urteile, jede Zahl aus einer Parameterdatei, Rechenbeispiele getestet, keine Zahlung von Airlines oder Fluggastrechte-Portalen.'} lang={lang} noindex={true} breadcrumbs={[{ label: 'Redaktionelle Grundsätze' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Redaktionelle Grundsätze</h1>
+    <h2>Was als Quelle gilt</h2><p>Nur amtliche Texte: EUR-Lex, gesetze-im-internet.de, legislation.gov.uk, Justice Laws Canada, Urteile des Gerichtshofs der Europäischen Union, Veröffentlichungen der Aufsichtsbehörden. Ein Zeitungsartikel kann auf eine Änderung hinweisen; veröffentlicht wird sie erst nach Lektüre des Originaltexts.</p><h2>Wie eine Zahl auf die Seite kommt</h2><p>Beträge, Schwellen und Fristen stehen in einer einzigen Parameterdatei mit Quelle und Prüfdatum. Seiten und Rechner lesen diese Datei; niemand tippt einen Betrag von Hand. Tests rechnen bekannte Fälle nach, bevor eine Änderung online geht.</p><h2>Was noch nicht gilt</h2><p>Eine beschlossene, aber noch nicht anwendbare Regel wie die Verordnung (EU) 2026/2202 wird mit ihrem Anwendungsdatum genannt; ein bloßer Entwurf wird als Entwurf bezeichnet.</p><h2>Unabhängigkeit</h2><p>{AUTHOR_NAME} erhält kein Geld von Airlines, Flughäfen, Fluggastrechte-Portalen, Kanzleien oder Versicherern. Die Seiten enthalten keine Affiliate-Links.</p><h2>Korrekturen</h2><p>Ein gemeldeter Fehler wird am amtlichen Text geprüft und, wenn wir uns geirrt haben, noch am selben Tag korrigiert. Schreiben Sie über die <a href={route('contact', lang)}>Kontaktseite</a>.</p>
+  </div>
+</PageLayout>

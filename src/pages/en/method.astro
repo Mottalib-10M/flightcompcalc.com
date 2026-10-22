@@ -1,0 +1,50 @@
+---
+/** Method: data, distance, scope of each regime, amounts, deadlines, letter, limits. Figures from params-2026.json. */
+import PageLayout from '../../layouts/PageLayout.astro';
+import { route, homeOf } from '../../i18n/routes';
+import { helpers } from '../../lib/helpers';
+import { AIRPORT_COUNT } from '../../lib/airports';
+import META from '../../data/airports-meta.json';
+import { breadcrumbSchema, webPageSchema } from '../../lib/seo';
+const lang = 'en';
+const h = helpers(lang);
+const P = h.P;
+const path = route('method', lang);
+const title = 'Flight compensation method: distance, rules and limits';
+const description = 'How the calculator works: great-circle distance from OurAirports, the scope of EU261, UK261 and APPR, amounts, reductions, deadlines and what it cannot know.';
+const s = (k: string, t: string) => h.src(k, t);
+const ex = h.table(['Example', 'Distance', 'EU261', 'UK261'], [
+  ['Frankfurt to Palma', h.km('FRA', 'PMI'), h.eur(P.eu261.amounts[0]), '–'],
+  ['Hamburg to Gran Canaria', h.km('HAM', 'LPA'), h.eur(P.eu261.intra_over_1500), '–'],
+  ['London Heathrow to New York JFK', h.km('LHR', 'JFK'), '–', h.gbp(P.uk261.amounts[2])],
+  ['Munich to Dubai', h.km('MUC', 'DXB'), h.eur(P.eu261.amounts[2]), '–'],
+], 'Delay of four hours at the final destination, cause within the airline’s control', ['l', 'r', 'r', 'r']);
+---
+<PageLayout title={title} description={description} lang={lang} jsonLd={[webPageSchema({ name: 'Method', description, path, lang }), breadcrumbSchema([{ name: 'Home', path: homeOf(lang) }, { name: 'Method', path }])]} breadcrumbs={[{ label: 'Method' }]}>
+  <article class="prose prose-slate max-w-none">
+    <h1>How the calculator works</h1>
+    <p>Every amount comes from a rule written in an official text and stored in one parameter file, read by the calculator, the pages and the automated tests. Nothing you type leaves your browser. This page lists the rules, the data and the limits.</p>
+    <h2>Airports and distance</h2>
+    <p>The airport list holds {h.n(AIRPORT_COUNT)} airports with scheduled passenger service and an IATA code, taken from <Fragment set:html={s('ourairports', 'OurAirports')} /> (public domain, read on {h.day(META.retrieved_at)}). Distance is the great-circle distance between the two airports on a sphere of radius 6,371 km, as Article 7(4) of the regulation requires; the distance actually flown, with detours and holding, does not count. For a journey booked as one, the distance runs from the first departure airport to the final destination (CJEU, Folkerts, C-11/11).</p>
+    <Fragment set:html={ex} />
+    <h2>Which law applies</h2>
+    <ul>
+      <li><strong>EU261</strong> (<Fragment set:html={s('eu261', 'Regulation (EC) No 261/2004')} />): departure from an airport in the EU (outermost regions included), Iceland, Norway or Switzerland, on any airline; or arrival there from outside on an airline licensed in the EU, EEA or Switzerland. For flights from 23 October 2027 the calculator switches to the text as amended by <Fragment set:html={s('eu2202', 'Regulation (EU) 2026/2202')} />.</li>
+      <li><strong>UK261</strong> (<Fragment set:html={s('uk261', 'retained regulation')} />): departure from the UK on any airline; arrival in the UK on a UK or EU airline; arrival in the EU on a UK airline.</li>
+      <li><strong>APPR</strong> (<Fragment set:html={s('appr', 'SOR/2019-150')} />): any flight to, from or within Canada, whatever the airline.</li>
+    </ul>
+    <p>When two regimes cover the same flight, the calculator shows both and puts the higher amount first. Compensation for the same event cannot be collected twice: Canada says so in <Fragment set:html={s('cta-act', 'section 86.11(3) of the Canada Transportation Act')} />, and EU and UK courts deduct what was already paid.</p>
+    <h2>Amounts</h2>
+    <p>EU261: {h.eur(P.eu261.amounts[0])} up to 1,500 km, {h.eur(P.eu261.amounts[1])} between 1,500 and 3,500 km and for every intra-EU flight over 1,500 km, {h.eur(P.eu261.amounts[2])} beyond. Delay: three hours or more at the final destination (<Fragment set:html={s('sturgeon', 'Sturgeon')} />), more than three hours for flights from 23 October 2027. The airline may halve the top band when the arrival delay stays under four hours (up to four hours under the amended text). UK261: {h.gbp(P.uk261.amounts[0])}, {h.gbp(P.uk261.amounts[1])}, {h.gbp(P.uk261.amounts[2])}, on the same thresholds. APPR: large carrier {h.cad(P.appr.delay.large[0])}, {h.cad(P.appr.delay.large[1])}, {h.cad(P.appr.delay.large[2])} for 3, 6 and 9 hours; small carrier {h.cad(P.appr.delay.small[0])}, {h.cad(P.appr.delay.small[1])}, {h.cad(P.appr.delay.small[2])}; denied boarding {h.cad(P.appr.denied_boarding.amounts[0])}, {h.cad(P.appr.denied_boarding.amounts[1])}, {h.cad(P.appr.denied_boarding.amounts[2])}.</p>
+    <h2>Cancellations and causes</h2>
+    <p>A cancellation notified at least 14 days ahead gives no compensation. Shorter notice gives none either when the replacement leaves and arrives close to the original times; the calculator applies the windows of the current text or of the amended one depending on the flight date. Weather, air traffic control, airport strikes, security risks and medical emergencies are flagged as “owed unless extraordinary circumstances”: the airline must prove the cause and that it took every reasonable measure. A technical fault and a strike by the airline’s own staff are treated as within its control in Europe (C-549/07, C-28/20); under the APPR a strike within the carrier is listed as outside its control and a fault found outside scheduled maintenance is treated as required for safety.</p>
+    <h2>Deadlines</h2>
+    <p>Germany: three years from the end of the year of the flight (<Fragment set:html={s('bgb195', 'section 195')} /> and <Fragment set:html={s('bgb199', 'section 199 BGB')} />). From 23 October 2027: claim to the airline within nine months of the flight date. England and Wales: six years (<Fragment set:html={s('limitation-ew', 'Limitation Act 1980')} />); Scotland: five years. Canada: request to the carrier within one year.</p>
+    <h2>The claim letter</h2>
+    <p>The letter is assembled in your browser from your answers and the rule that applies. Name, address, booking reference and bank details are kept in the page’s memory only: they are not stored, not sent and never written into the shareable link, which only carries the airports and the settings.</p>
+    <h2>Limits</h2>
+    <p>The calculator cannot know the real cause of a delay, the airline’s licence on a codeshare (enter the operating airline), or whether you already accepted vouchers. Package holidays, flights on free tickets not available to the public and flights from outside Europe on non-European airlines are outside EU261. It gives general information, not legal advice.</p>
+    <h2>Checks</h2>
+    <p>Automated tests replay worked examples before each release: the 2 h 59 / 3 h boundary, the reduction at 3 h 30 on long haul, the 23 October 2027 switch, intra-EU flights over 3,500 km, UK and Canadian scope, APPR amounts and every deadline. The parameter file was last checked against the official texts on {h.day(P.retrieved_at)}; the SDR rates used for baggage limits are updated weekly by a script.</p>
+  </article>
+</PageLayout>

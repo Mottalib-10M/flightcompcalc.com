@@ -1,0 +1,21 @@
+{
+ "name": "Flugentschädigung ohne Provision",
+ "short_name": "Flugentschädigung",
+ "description": "Indemnité exacte d'un vol retardé, annulé ou surbooké selon CE 261, UK261 et l'APPR canadien, avec lettre de réclamation, sans commission ni inscription.",
+ "start_url": "/de/",
+ "display": "standalone",
+ "background_color": "#ffffff",
+ "theme_color": "#B3261E",
+ "icons": [
+  {
+   "src": "/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  }
+ ]
+}

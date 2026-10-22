@@ -1,0 +1,21 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_URL } from '../../data/site-config';
+import { route, homeOf } from '../../i18n/routes';
+import { breadcrumbSchema } from '../../lib/seo';
+const lang = 'de';
+const code = `<iframe src="${SITE_URL}/embed/flugentschaedigung/" title="Flugentschädigung berechnen (einbettbarer Rechner)" width="100%" height="900" style="border:0;max-width:900px" loading="lazy"></iframe>`;
+---
+<PageLayout title={'Rechner für Flugentschädigung auf der eigenen Seite einbinden'} description={'Reiseblogs und Foren können den Rechner für Flugverspätung und Annullierung mit einer Zeile Code einbinden: kostenlos, ohne Cookie, Ergebnis nach EU261, UK261 und APPR.'} lang={lang} noindex={true} jsonLd={[breadcrumbSchema([{ name: 'Start', path: homeOf(lang) }, { name: 'Rechner einbinden', path: route('widget', lang) }])]} breadcrumbs={[{ label: 'Rechner einbinden' }]} showAuthor={false}>
+  <header class="mb-6">
+    <h1 class="text-3xl font-bold text-navy-900 md:text-4xl">Rechner einbinden</h1>
+    <p class="mt-3 text-lg text-navy-700">Eine Zeile Code. Der eingebundene Rechner folgt jeder Aktualisierung der Rechtslage.</p>
+  </header>
+  <div class="prose prose-slate max-w-none">
+    <pre class="overflow-x-auto rounded-lg bg-navy-900 p-4 text-sm text-white"><code>{code}</code></pre>
+    <p>Der Rechner läuft im Browser Ihrer Leser und sendet weder uns noch Ihnen Daten. Bitte lassen Sie den Link unter dem Rechner stehen: Über ihn finden Leser Quellen und Methodik.</p>
+  </div>
+  <div class="mt-8 overflow-hidden rounded-xl border border-navy-200">
+    <iframe src="/embed/flugentschaedigung/" title="Flugentschädigung berechnen (einbettbarer Rechner)" width="100%" height="900" style="border:0" loading="lazy"></iframe>
+  </div>
+</PageLayout>

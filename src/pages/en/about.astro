@@ -1,0 +1,30 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LegalIdentity from '../../components/LegalIdentity.astro';
+import { route, homeOf } from '../../i18n/routes';
+import { AUTHOR_NAME, AUTHOR_DESC, CONTACT_EMAIL } from '../../data/site-config';
+import { srcLink } from '../../lib/helpers';
+import { profilePageSchema, breadcrumbSchema } from '../../lib/seo';
+const lang = 'en';
+const path = route('about', lang);
+const title = 'Flight Compensation Without Commission: who publishes it';
+const description = 'Who publishes this flight delay compensation calculator, why it takes no commission, where the law and airport data come from, and what it will never ask you.';
+const s = (k: string, t: string) => srcLink(k, lang, t);
+---
+<PageLayout title={title} description={description} lang={lang} jsonLd={[profilePageSchema({ path, lang }), breadcrumbSchema([{ name: 'Home', path: homeOf(lang) }, { name: 'About', path }])]} breadcrumbs={[{ label: 'About' }]}>
+  <article class="prose prose-slate max-w-none">
+    <h1>About this site</h1>
+    <p>{AUTHOR_DESC.en}</p>
+    <h2>Why it exists</h2>
+    <p>Type “flight delay compensation” into a search engine and most of the first page belongs to claims companies. Their calculators are funnels: they ask for your booking reference and email before showing anything, and when they win they keep a share of the payment, commonly a quarter to a third once VAT is added. The airline owes you the full amount, and the claim itself is a letter. This site gives you the exact figure, the deadline and the letter, and leaves the money where the law puts it: with you.</p>
+    <h2>Who publishes it</h2>
+    <p>{AUTHOR_NAME} is a company that builds calculators from public texts and open data. It is not a public body, a law firm or a claims company, and it has no link with any airline, airport, regulator or enforcement body. It sells nothing, receives no commission, carries no affiliate links and asks for no name or email.</p>
+    <LegalIdentity lang={lang} />
+    <h2>Where the figures come from</h2>
+    <p>The rules are read on the official texts: <Fragment set:html={s('eu261', 'Regulation (EC) No 261/2004')} /> and its amendment by <Fragment set:html={s('eu2202', 'Regulation (EU) 2026/2202')} />, the retained <Fragment set:html={s('uk261', 'UK261')} /> on legislation.gov.uk, Canada's <Fragment set:html={s('appr', 'Air Passenger Protection Regulations')} />, and the judgments of the Court of Justice that set the three-hour rule. Airport coordinates come from <Fragment set:html={s('ourairports', 'OurAirports')} />, released into the public domain. The <a href={route('method', lang)}>method page</a> sets out every rule the calculator applies; the <a href={route('editorial', lang)}>editorial policy</a> explains how errors are corrected.</p>
+    <h2>What it does not do</h2>
+    <p>It does not know why your flight was late: the airline does. It cannot send a claim, negotiate or go to court for you. Its result is general information based on what you enter, not legal advice.</p>
+    <h2>Write to us</h2>
+    <p><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>, to report an error or a ruling we have missed.</p>
+  </article>
+</PageLayout>

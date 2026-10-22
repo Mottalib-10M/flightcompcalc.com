@@ -1,0 +1,30 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LegalIdentity from '../../components/LegalIdentity.astro';
+import { route, homeOf } from '../../i18n/routes';
+import { AUTHOR_NAME, AUTHOR_DESC, CONTACT_EMAIL } from '../../data/site-config';
+import { srcLink } from '../../lib/helpers';
+import { profilePageSchema, breadcrumbSchema } from '../../lib/seo';
+const lang = 'fr';
+const path = route('about', lang);
+const title = 'Indemnité de vol sans commission : qui publie ce site';
+const description = 'Qui publie ce calculateur d’indemnité pour vol retardé ou annulé, pourquoi il ne prend aucune commission, d’où viennent les règles et ce qu’il ne demande pas.';
+const s = (k: string, t: string) => srcLink(k, lang, t);
+---
+<PageLayout title={title} description={description} lang={lang} jsonLd={[profilePageSchema({ path, lang }), breadcrumbSchema([{ name: 'Accueil', path: homeOf(lang) }, { name: 'À propos', path }])]} breadcrumbs={[{ label: 'À propos' }]}>
+  <article class="prose prose-slate max-w-none">
+    <h1>À propos de ce site</h1>
+    <p>{AUTHOR_DESC.fr}</p>
+    <h2>Pourquoi il existe</h2>
+    <p>Une recherche sur l’indemnisation d’un vol retardé mène d’abord à des sociétés de réclamation. Leurs calculateurs demandent un code de réservation et un courriel avant d’afficher quoi que ce soit, puis gardent une part de l’indemnité en cas de succès, souvent le quart ou le tiers taxes comprises. Le transporteur vous doit pourtant la totalité, et la demande elle-même tient en une lettre. Ce site donne le montant, le délai et la lettre : l’argent reste à vous.</p>
+    <h2>Qui le publie</h2>
+    <p>{AUTHOR_NAME} est une société qui conçoit des calculateurs à partir de textes officiels et de données ouvertes. Ce n’est ni un organisme public, ni un cabinet d’avocats, ni une société de réclamation, et elle n’a aucun lien avec une compagnie aérienne, un aéroport ou l’Office des transports du Canada. Elle ne vend rien, ne touche aucune commission, ne place aucun lien d’affiliation et ne demande ni nom ni courriel.</p>
+    <LegalIdentity lang={lang} />
+    <h2>D’où viennent les règles</h2>
+    <p>Du <Fragment set:html={s('appr', 'Règlement sur la protection des passagers aériens')} />, de la <Fragment set:html={s('cta-act', 'Loi sur les transports au Canada')} />, du <Fragment set:html={s('eu261', 'règlement (CE) n° 261/2004')} /> pour les vols au départ de l’Europe et des données d’<Fragment set:html={s('ourairports', 'OurAirports')} />, dans le domaine public. La <a href={route('method', lang)}>méthode</a> détaille chaque règle appliquée ; la <a href={route('editorial', lang)}>politique éditoriale</a> explique comment une erreur est corrigée.</p>
+    <h2>Ce qu’il ne fait pas</h2>
+    <p>Il ne connaît pas la cause de votre retard : le transporteur, si. Il n’envoie aucune demande, ne négocie pas et ne vous représente pas. Le résultat est une information générale fondée sur vos réponses, pas un avis juridique.</p>
+    <h2>Nous écrire</h2>
+    <p><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>, pour signaler une erreur ou une décision qui nous aurait échappé.</p>
+  </article>
+</PageLayout>
