@@ -1,6 +1,6 @@
 /** Configuration centrale du site (générée par new-site.py). */
-export const SITE_URL = "https://flight-delay-compensation.example";
-export const SITE_NAMES: Record<string, string> = {"de": "Flugentschädigung ohne Provision", "en": "Flight Compensation Without Commission", "fr": "Indemnité de vol sans commission"};
+export const SITE_URL = "https://flightcompcalc.com";
+export const SITE_NAMES: Record<string, string> = {"de": "Flight Comp Calc", "en": "Flight Comp Calc", "fr": "Indemnité de vol sans commission"};
 export const LANG_TAGS: Record<string, string> = {"de": "de-DE", "en": "en", "fr": "fr-CA"};
 export const OG_LOCALES: Record<string, string> = {"de": "de_DE", "en": "en_GB", "fr": "fr_CA"};
 export const LOCALE_TAG = 'de-DE';
@@ -16,7 +16,7 @@ export const AUTHOR_DESC: Record<string, string> = {"de": "Radif Partners misst 
  *  themes reellement traites par le site, pas une liste de mots-cles : un sujet
  *  declare ici sans page qui le couvre est une declaration fausse. */
 export const KNOWS_ABOUT: Record<string, string[]> = {"de": ["Verordnung (EG) Nr. 261/2004", "Verordnung (EU) 2026/2202", "Ausgleichszahlung bei Flugverspätung und Annullierung", "Großkreisentfernung", "Montrealer Übereinkommen (Gepäck)", "Fahrgastrechte im Bahnverkehr, Verordnung (EU) 2021/782"], "en": ["EU Regulation 261/2004", "UK261 (retained Regulation 261/2004)", "Canada Air Passenger Protection Regulations", "Great-circle distance", "Montreal Convention baggage limits"], "fr": ["Règlement sur la protection des passagers aériens", "Indemnisation des retards et annulations au Canada", "Refus d'embarquement", "Convention de Montréal (bagages)"]};
-export const CONTACT_EMAIL = "kontakt@flight-delay-compensation.example";
+export const CONTACT_EMAIL = "kontakt@flightcompcalc.com";
 export const THEME_COLOR = '#B3261E';
 export const LOGO_SYMBOL = '✈';
 export const BING_VERIFY_CODE = '';

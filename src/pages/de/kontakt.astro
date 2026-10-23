@@ -8,7 +8,7 @@ const lang = 'de';
 const path = route('contact', lang);
 const description = 'Schreiben Sie dem Betreiber des Rechners für Flugentschädigung: Fehler, Urteile, Quellen. Nur E-Mail, kein Formular, kein Konto, keine Provision und keine Rechtsberatung.';
 ---
-<PageLayout title={'Kontakt Flugentschädigung ohne Provision: Fehler melden'} description={description} lang={lang} noindex={true} jsonLd={[contactPageSchema({ name: 'Kontakt', description, path, lang })]} breadcrumbs={[{ label: 'Kontakt' }]} showAuthor={false}>
+<PageLayout title={'Kontakt Flight Comp Calc: Fehler melden'} description={description} lang={lang} noindex={true} jsonLd={[contactPageSchema({ name: 'Kontakt', description, path, lang })]} breadcrumbs={[{ label: 'Kontakt' }]} showAuthor={false}>
   <div class="prose prose-slate max-w-none">
     <h1>Kontakt</h1>
     <p>Schreiben Sie an <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Es gibt kein Formular, keine Telefonnummer und kein Konto: eine Adresse, gelesen von den Menschen, die den Rechner pflegen.</p>

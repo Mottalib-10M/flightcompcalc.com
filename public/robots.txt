@@ -3,4 +3,4 @@ Allow: /
 
 Disallow: /*?*
 
-Sitemap: https://flight-delay-compensation.example/sitemap-index.xml
+Sitemap: https://flightcompcalc.com/sitemap-index.xml
