@@ -2,14 +2,14 @@
  "source": "OurAirports",
  "source_url": "https://ourairports.com/data/",
  "licence": "Public Domain",
- "retrieved_at": "2026-10-21",
- "count": 4008,
+ "retrieved_at": "2026-10-26",
+ "count": 4009,
  "by_zone": {
   "eu": 410,
   "eea": 55,
   "ch": 5,
   "gb": 53,
   "ca": 252,
-  "xx": 3233
+  "xx": 3234
  }
 }
